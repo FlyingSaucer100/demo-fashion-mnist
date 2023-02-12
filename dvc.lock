@@ -10,6 +10,7 @@ stages:
     - path: output/data.pkl
       md5: 35353c71da0985eed8bb507bbc53bd91
       size: 54950285
+      isexec: true
   train:
     cmd: python src/train.py
     deps:
@@ -21,21 +22,24 @@ stages:
       size: 2521
     params:
       params.yaml:
-        train.batch_size: 128
+        train.batch_size: 32
         train.dropout: 0.4
         train.hidden_units: 64
         train.lr: 0.001
-        train.num_epochs: 10
+        train.num_epochs: 5
     outs:
     - path: output/model.h5
-      md5: b23662125b47e5f80e4d1fcaf95d63b2
-      size: 3680480
+      md5: bea5982233adfb6fa2d7f7f48337eb9b
+      size: 3681752
+      isexec: true
     - path: output/train/train_accuracy.csv
-      md5: 8a094f6fdb7514fa162532aff894fa68
-      size: 225
+      md5: fa789c211f233a8ead707f84dda5c371
+      size: 120
+      isexec: true
     - path: output/train/train_loss.csv
-      md5: e0cc00c35efcbd851f1263e568d00583
-      size: 228
+      md5: fab0fb29bb1de2a3c5cdf32a2fef8ebf
+      size: 118
+      isexec: true
   evaluate:
     cmd: python src/evaluate.py
     deps:
@@ -43,19 +47,21 @@ stages:
       md5: 35353c71da0985eed8bb507bbc53bd91
       size: 54950285
     - path: output/model.h5
-      md5: b23662125b47e5f80e4d1fcaf95d63b2
-      size: 3680480
+      md5: bea5982233adfb6fa2d7f7f48337eb9b
+      size: 3681752
     - path: src/evaluate.py
       md5: f1de572f6c093813c7344ab3e7c569e9
       size: 3236
     outs:
     - path: output/metrics.json
-      md5: b29956032a06a1d806165d21d80d306d
-      size: 61
+      md5: b724de053117cd64317aa2642ebf7608
+      size: 60
+      isexec: true
     - path: output/test/predictions.json
-      md5: 648f2dc6e7c262ca7189193602ba090f
+      md5: ea375656d62140f721e41751269936f5
       size: 310000
+      isexec: true
     - path: output/test/samples_of_mispredicted_images/
-      md5: f1909170529de28db60c38028ecb0297.dir
-      size: 171699
+      md5: 6c2fc015a9dbb95e9f9de5b9524d625e.dir
+      size: 174663
       nfiles: 10
